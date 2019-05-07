@@ -58,6 +58,8 @@ class NewUser extends React.Component{
             password:"",
             id:"",
             type:"CTS",
+            direccion:"",
+            number:"",
             references:[]
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -87,6 +89,10 @@ class NewUser extends React.Component{
                             <FormControl margin="normal" required fullWidth onChange={event => this.setState({id:event.target.value})}>
                                 <InputLabel htmlFor="id">Cedula</InputLabel>
                                 <Input name="id" type="number" id="id" autoComplete="id"/>
+                            </FormControl>
+                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({direccion:event.target.value})}>
+                                <InputLabel htmlFor="direccion">Direccion</InputLabel>
+                                <Input name="direccion" type="string" id="direccion" autoComplete="direccion"/>
                             </FormControl>
                             <FormControl margin="normal" required fullWidth >
                                 <FormLabel component="legend">Tipo</FormLabel>
