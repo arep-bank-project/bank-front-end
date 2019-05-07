@@ -11,6 +11,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Reference from "./Reference";
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
     main: {
@@ -60,14 +62,28 @@ class NewUser extends React.Component{
             type:"CTS",
             direccion:"",
             number:"",
-            references:[]
+            references:{
+                email:"",
+                id:"",
+                direccion:"",
+                number:""
+            }
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getReferences = this.getReferences.bind(this);
+        this.setReferences = this.setReferences.bind(this);
+        this.restartReferences = this.restartReferences.bind(this);
     }
+
+    getReferences = () => {return this.state.references};
+
+    setReferences = (ref) => {this.setState({references:ref})};
+
+    restartReferences = () => {if(this.state.references=={references:{email:"",id:"",direccion:"",number:""}}) {this.setState({references:{email:"",id:"",direccion:"",number:""}})}};
 
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state.email+" "+this.state.password)
+        console.log(this.state)
     }
 
     render(){
@@ -77,6 +93,9 @@ class NewUser extends React.Component{
                 <main className={classes.main}>
                     <CssBaseline/>
                     <Paper>
+                        <Typography variant="h4" gutterBottom>
+                            Formulario para pedir cuenta
+                        </Typography>
                         <form onSubmit={this.handleSubmit}>
                             <FormControl margin="normal" required fullWidth onChange={event => this.setState({email:event.target.value})}>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -94,6 +113,10 @@ class NewUser extends React.Component{
                                 <InputLabel htmlFor="direccion">Direccion</InputLabel>
                                 <Input name="direccion" type="string" id="direccion" autoComplete="direccion"/>
                             </FormControl>
+                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({number:event.target.value})}>
+                                <InputLabel htmlFor="number">Celular</InputLabel>
+                                <Input name="number" type="number" id="number" autoComplete="number"/>
+                            </FormControl>
                             <FormControl margin="normal" required fullWidth >
                                 <FormLabel component="legend">Tipo</FormLabel>
                                 <RadioGroup value={this.state.type} onChange={event => this.setState({type:event.target.value})}>
@@ -102,7 +125,14 @@ class NewUser extends React.Component{
                                     <FormControlLabel value="Persona Juridica" control={<Radio color="primary"/>} label="Persona Juridica" labelPlacement="start"/>
                                 </RadioGroup>
                             </FormControl>
-                            {this.state.type == "CTS"?"":"bla"}
+                            {this.state.type == "CTS"?this.restartReferences():
+                            <>
+                                <Typography variant="h5" gutterBottom>
+                                    Referencia
+                                </Typography>
+                                <Reference references={this.getReferences} updateReferences={this.setReferences}/>
+                            </>
+                            }
                             <Button type="submit"
                                     fullWidth
                                     variant="contained"
