@@ -58,7 +58,7 @@ class Login extends React.Component{
 
     handleLogin(e){
         e.preventDefault();
-        console.log(this.state.email+" "+this.state.password)
+        this.props.handleLogin(true);
     }
 
     render(){
