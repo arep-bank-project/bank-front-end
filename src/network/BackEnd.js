@@ -8,6 +8,12 @@ export function createNewuser(info){
 }
 
 export function handleLoginPage(info) {
-    var login = false;
+    var login = true;
     return login;
+}
+
+export function transferMoney(info) {
+    var succes= false;
+    console.log(info);
+    return succes;
 }

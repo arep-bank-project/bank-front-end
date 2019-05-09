@@ -10,6 +10,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
+import {transferMoney} from "../network/BackEnd";
 
 class Transference extends React.Component{
     constructor(props){
@@ -20,7 +21,7 @@ class Transference extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        transferMoney(this.state);
     };
 
     render() {
