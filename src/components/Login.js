@@ -7,6 +7,7 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import withStyles from '@material-ui/core/styles/withStyles';
+import {handleLoginPage} from "../network/BackEnd";
 
 const styles = theme => ({
     main: {
@@ -58,7 +59,7 @@ class Login extends React.Component{
 
     handleLogin(e){
         e.preventDefault();
-        this.props.handleLogin(true);
+        this.props.handleLogin(handleLoginPage(this.state));
     }
 
     render(){

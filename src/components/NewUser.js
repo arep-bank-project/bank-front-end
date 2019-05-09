@@ -13,6 +13,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Reference from "./Reference";
 import Typography from '@material-ui/core/Typography';
+import {createNewuser} from "../network/BackEnd";
 
 const styles = theme => ({
     main: {
@@ -79,11 +80,15 @@ class NewUser extends React.Component{
 
     setReferences = (ref) => {this.setState({references:ref})};
 
-    restartReferences = () => {if(this.state.references=={references:{email:"",id:"",direccion:"",number:""}}) {this.setState({references:{email:"",id:"",direccion:"",number:""}})}};
+    restartReferences = () => {
+        if(this.state.references.email!="" || this.state.references.id!="" || this.state.references.direccion!="" || this.state.references.number!=""){
+            this.setState({references:{email:"",id:"",direccion:"",number:""}})
+        }
+    };
 
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state)
+        createNewuser(this.state);
     }
 
     render(){

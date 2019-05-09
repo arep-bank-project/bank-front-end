@@ -8,7 +8,7 @@ import Main from './components/Main';
 class App extends Component{
     constructor(props){
         super(props);
-        this.state = {loggedIn:true};
+        this.state = {loggedIn:false};
         this.handleLoggedIn = this.handleLoggedIn.bind(this);
     }
 
