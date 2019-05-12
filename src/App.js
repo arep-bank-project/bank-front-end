@@ -8,7 +8,11 @@ import Main from './components/Main';
 class App extends Component{
     constructor(props){
         super(props);
-        this.state = {loggedIn:false};
+        if(sessionStorage.getItem("accessToken")){
+            this.state = {loggedIn:true};
+        }else {
+            this.state = {loggedIn: false};
+        }
         this.handleLoggedIn = this.handleLoggedIn.bind(this);
     }
 
@@ -19,7 +23,7 @@ class App extends Component{
             <Router>
                 {this.state.loggedIn===true?
                     <Switch>
-                        <Route path="/" component={Main}/>
+                        <Route path="/" component={() => <Main handleLogin={this.handleLoggedIn}/>}/>
                     </Switch>
                     :
                     <Switch>

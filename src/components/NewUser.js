@@ -57,19 +57,20 @@ class NewUser extends React.Component{
     constructor(props){
         super(props);
         this.state={
+            name:"",
             email:"",
             password:"",
             id:"",
             type:"CTS",
-            direccion:"",
-            number:"",
+            address:"",
+            phone:"",
             references:{
                 email:"",
                 id:"",
-                direccion:"",
+                address:"",
                 number:""
             }
-        }
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getReferences = this.getReferences.bind(this);
         this.setReferences = this.setReferences.bind(this);
@@ -81,8 +82,8 @@ class NewUser extends React.Component{
     setReferences = (ref) => {this.setState({references:ref})};
 
     restartReferences = () => {
-        if(this.state.references.email!="" || this.state.references.id!="" || this.state.references.direccion!="" || this.state.references.number!=""){
-            this.setState({references:{email:"",id:"",direccion:"",number:""}})
+        if(this.state.references.email!="" || this.state.references.id!="" || this.state.references.address!="" || this.state.references.number!=""){
+            this.setState({references:{email:"",id:"",address:"",number:""}})
         }
     };
 
@@ -102,6 +103,10 @@ class NewUser extends React.Component{
                             Formulario para pedir cuenta
                         </Typography>
                         <form onSubmit={this.handleSubmit}>
+                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({name:event.target.value})}>
+                                <InputLabel htmlFor="email">Nombre Completo</InputLabel>
+                                <Input id="name" name="name" autoComplete="name" autoFocus/>
+                            </FormControl>
                             <FormControl margin="normal" required fullWidth onChange={event => this.setState({email:event.target.value})}>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
                                 <Input id="email" name="email" autoComplete="email" autoFocus/>
@@ -114,11 +119,11 @@ class NewUser extends React.Component{
                                 <InputLabel htmlFor="id">Cedula</InputLabel>
                                 <Input name="id" type="number" id="id" autoComplete="id"/>
                             </FormControl>
-                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({direccion:event.target.value})}>
-                                <InputLabel htmlFor="direccion">Direccion</InputLabel>
-                                <Input name="direccion" type="string" id="direccion" autoComplete="direccion"/>
+                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({address:event.target.value})}>
+                                <InputLabel htmlFor="address">Direccion</InputLabel>
+                                <Input name="address" type="string" id="address" autoComplete="address"/>
                             </FormControl>
-                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({number:event.target.value})}>
+                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({phone:event.target.value})}>
                                 <InputLabel htmlFor="number">Celular</InputLabel>
                                 <Input name="number" type="number" id="number" autoComplete="number"/>
                             </FormControl>

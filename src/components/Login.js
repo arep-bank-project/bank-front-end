@@ -51,15 +51,16 @@ class Login extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            email:"",
+            id:0,
             password:""
-        }
+        };
         this.handleLogin = this.handleLogin.bind(this);
     }
 
     handleLogin(e){
         e.preventDefault();
-        this.props.handleLogin(handleLoginPage(this.state));
+        handleLoginPage(this.state,this.props.handleLogin);
+        //this.props.handleLogin(handleLoginPage(this.state));
     }
 
     render(){
@@ -70,9 +71,9 @@ class Login extends React.Component{
                     <CssBaseline/>
                     <Paper>
                         <form onSubmit={this.handleLogin}>
-                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({email:event.target.value})}>
-                                <InputLabel htmlFor="email">Email Address</InputLabel>
-                                <Input id="email" name="email" autoComplete="email" autoFocus/>
+                            <FormControl margin="normal" required fullWidth onChange={event => this.setState({id:event.target.value})}>
+                                <InputLabel htmlFor="id">Cedula</InputLabel>
+                                <Input id="id" name="id" type="number" autoComplete="id" autoFocus/>
                             </FormControl>
                             <FormControl margin="normal" required fullWidth onChange={event => this.setState({password:event.target.value})}>
                                 <InputLabel htmlFor="password">Password</InputLabel>

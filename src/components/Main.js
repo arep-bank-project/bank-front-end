@@ -26,9 +26,15 @@ class Main extends React.Component{
         this.state = {open:false};
         this.handleDrawerClose = this.handleDrawerClose.bind(this);
         this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+        this.handleCloseSession = this.handleCloseSession.bind(this);
     }
     handleDrawerOpen = () => {this.setState({open:true})};
     handleDrawerClose = () => {this.setState({open:false})};
+    handleCloseSession = () =>{
+      sessionStorage.clear();
+      window.location.href="/";
+      this.props.handleLogin(false);
+    };
     render() {
         return(
             <>
@@ -62,6 +68,9 @@ class Main extends React.Component{
                         </ListItem>
                         <ListItem button key="transferencias" component={Link} to="/transference">
                             <ListItemText primary="Transferencias"/>
+                        </ListItem>
+                        <ListItem button key="cerrarSesion" onClick={this.handleCloseSession}>
+                            <ListItemText primary="Cerrar Session"/>
                         </ListItem>
                     </List>
                 </Drawer>
