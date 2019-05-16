@@ -6,8 +6,11 @@ var config = {
 };
 
 export function getEstadoDeCuenta(){
-    var estado = {cantidad:2500, numero:102114144, tipo:"CTS"};
-    return estado;
+    let data = JSON.parse(sessionStorage.getItem("userData"));
+    let estado = {cantidad:data.account.amount,
+        numero:data.account.accountId,
+        tipo:data.type};
+return estado;
 }
 
 export function createNewuser(info){
@@ -27,7 +30,8 @@ export function createNewuser(info){
 export function handleLoginPage(info, fun) {
     axios.post(host+"/user/login",info)
         .then(res=>{
-            sessionStorage.setItem("accessToken",res.data.accessToken);
+            sessionStorage.setItem("accessToken",res.data.token.accessToken);
+            sessionStorage.setItem("userData",JSON.stringify(res.data));
             fun(true);
         })
         .catch(err=>{
