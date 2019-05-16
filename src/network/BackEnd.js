@@ -4,8 +4,9 @@ var host = "http://localhost:8080";
 var config = {
     headers: {'Access-Control-Allow-Origin': '*'}
 };
-
-export function getEstadoDeCuenta(){
+var funHome;
+export function getEstadoDeCuenta(funUpdate){
+    funHome = funUpdate;
     let data = JSON.parse(sessionStorage.getItem("userData"));
     let estado = {cantidad:data.account.amount,
         numero:data.account.accountId,
@@ -32,6 +33,7 @@ export function handleLoginPage(info, fun) {
         .then(res=>{
             sessionStorage.setItem("accessToken",res.data.token.accessToken);
             sessionStorage.setItem("userData",JSON.stringify(res.data));
+            sessionStorage.setItem("info",JSON.stringify(info));
             fun(true);
         })
         .catch(err=>{
@@ -39,8 +41,27 @@ export function handleLoginPage(info, fun) {
         });
 }
 
+function handleInfo() {
+    axios.post(host+"/user/login",JSON.parse(sessionStorage.getItem("info")))
+        .then(res=>{
+            console.log("HOALAAA");
+            console.log(res);
+            sessionStorage.setItem("accessToken",res.data.token.accessToken);
+            sessionStorage.setItem("userData",JSON.stringify(res.data));
+            funHome();
+        });
+}
+
 export function transferMoney(info) {
     var succes= false;
+    let data = JSON.parse(sessionStorage.getItem("userData"));
+    axios.put(host+"/user/transfer?fromAccount="+data.account.accountId+"&toAccount="+info.number+"&amount="+info.quantity)
+        .then(res=>{
+            window.alert("Transferencia exitosa");
+            handleInfo();
+        }).catch(err =>{
+            window.alert("No se pudo hacer la transferncia");
+    });
     console.log(info);
     return succes;
 }

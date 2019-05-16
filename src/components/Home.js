@@ -7,8 +7,11 @@ import {getEstadoDeCuenta} from '../network/BackEnd'
 class Home extends React.Component{
     constructor(props){
         super(props);
-        this.state = getEstadoDeCuenta();
+        this.updateState = this.updateState.bind(this);
+        this.state = getEstadoDeCuenta(this.updateState);
     }
+
+    updateState=()=>{this.state = getEstadoDeCuenta(this.updateState)};
 
     render() {
         return(
