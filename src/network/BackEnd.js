@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-var host = "http://localhost:8080";
+//var host = "http://localhost:8080";
+var host = "http://ec2-54-196-0-103.compute-1.amazonaws.com:8080/";
 var config = {
     headers: {'Access-Control-Allow-Origin': '*'}
 };
@@ -44,7 +45,6 @@ export function handleLoginPage(info, fun) {
 function handleInfo() {
     axios.post(host+"/user/login",JSON.parse(sessionStorage.getItem("info")))
         .then(res=>{
-            console.log("HOALAAA");
             console.log(res);
             sessionStorage.setItem("accessToken",res.data.token.accessToken);
             sessionStorage.setItem("userData",JSON.stringify(res.data));
